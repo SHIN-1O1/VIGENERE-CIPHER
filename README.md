@@ -27,10 +27,27 @@ STEP-5: The characters in the keyword are repeated sequentially so as to match w
 STEP-6: Pick the first letter of the plain text and that of the keyword as the row indices and column indices respectively.
 STEP-7: The junction character where these two meet forms the cipher character.
 STEP-8: Repeat the above steps to generate the entire cipher text.
-
-
 ## PROGRAM
-
+~~~
+def vigenere_cipher(text, key, decrypt=False):
+    result = []
+    key_len = len(key)
+    for i, char in enumerate(text):
+        shift = ord(key[i % key_len]) - ord('A')
+        if decrypt:
+            shift = 26 - shift
+        new_char = chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
+        result.append(new_char)
+    return "".join(result)
+text = input("Enter text (UPPERCASE only): ")
+key = input("Enter key (UPPERCASE only): ")
+encrypted = vigenere_cipher(text, key, decrypt=False)
+print("Encrypted Message:", encrypted)
+decrypted = vigenere_cipher(encrypted, key, decrypt=True)
+print("Decrypted Message:", decrypted)
+~~~
 ## OUTPUT
-
+<img width="1920" height="1200" alt="Screenshot (4)" src="https://github.com/user-attachments/assets/d35c64c8-3913-4c02-a1c2-33e776e8161b" />
 ## RESULT
+
+Thus the program executed successfully
